@@ -10,17 +10,25 @@ import java.util.Arrays;
 
 public class RemoveElement {
     public int removeElement(int[] nums, int val) {
-        int length = nums.length;
-        int i = 0;
-        while (i < length) {
-            if (nums[i] == val) {
-                nums[i] = nums[length - 1];
-                length --;
-            } else {
-                i ++;
+        // 快慢指针
+        int slowIndex = 0;
+        for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+            if (nums[fastIndex] != val) {
+                nums[slowIndex] = nums[fastIndex];
+                slowIndex++;
             }
         }
-        return length;
+        return slowIndex;
+    }
+
+    public void removeElementViolence(int[] nums, int val) {
+        int slowIndex = 0;
+        for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+            if (nums[fastIndex] != val) {
+                nums[slowIndex] = nums[fastIndex];
+                slowIndex++;
+            }
+        }
     }
 
 
@@ -28,7 +36,7 @@ public class RemoveElement {
         // 写测试用例
         RemoveElement removeElement = new RemoveElement();
         int[] nums = new int[]{0,1,2,2,3,0,4,2};
-        int i = removeElement.removeElement(nums, 2);
+        removeElement.removeElementViolence(nums, 2);
         System.out.println(Arrays.toString(nums));
     }
 

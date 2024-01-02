@@ -11,24 +11,28 @@ import java.util.Arrays;
 public class SortedSquares {
 
     public int[] sortedSquares(int[] nums) {
-        int left = 0;
-        int right = nums.length - 1;
-        int[] result = new int[nums.length];
-        while (left < right) {
-            if (nums[left] * nums[left] > nums[right] * nums[right]) {
-                result[right - left] = nums[left] * nums[left];
-                left ++;
+
+        int size = nums.length;
+        int preIndex = 0;
+        int afterIndex = size - 1;
+        int[] newSortedSquares = new int[size];
+
+        while (preIndex <= afterIndex) {
+            if (nums[preIndex] * nums[preIndex] >= nums[afterIndex] * nums[afterIndex]) {
+                newSortedSquares[--size] = nums[preIndex] * nums[preIndex];
+                preIndex++;
             } else {
-                result[right - left] = nums[right] * nums[right];
-                right --;
+                newSortedSquares[--size] = nums[afterIndex] * nums[afterIndex];
+                afterIndex--;
             }
         }
-        return result;
+
+        return newSortedSquares;
     }
 
     // 编写测试用例
     public static void main(String[] args) {
-        int[] a = new int[]{-4,-1,0,3,10};
+        int[] a = new int[]{-7,-3,2,3,11};
         SortedSquares sortedSquares = new SortedSquares();
         int[] ints = sortedSquares.sortedSquares(a);
         System.out.println(Arrays.toString(ints));
